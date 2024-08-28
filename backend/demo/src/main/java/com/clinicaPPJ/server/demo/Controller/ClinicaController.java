@@ -1,19 +1,20 @@
 package com.clinicaPPJ.server.demo.Controller;
 
-import com.clinicaPPJ.server.demo.Model.Cliente;
-import com.clinicaPPJ.server.demo.Model.Mascota;
-import com.clinicaPPJ.server.demo.Model.Veterinario;
-import com.clinicaPPJ.server.demo.Service.ClinicaService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.clinicaPPJ.server.demo.Model.Cliente;
+import com.clinicaPPJ.server.demo.Model.Mascota;
+import com.clinicaPPJ.server.demo.Model.Veterinario;
+import com.clinicaPPJ.server.demo.Service.ClinicaService;
 
 @RestController
 @RequestMapping("/clinica")
@@ -35,6 +36,16 @@ public class ClinicaController {
     @GetMapping("/veterinarios")
     public List<Veterinario> obtenerTodosLosVeterinarios() {
         return clinicaService.obtenerTodosLosVeterinarios();
+    }
+
+    @GetMapping("/mascotas/cliente/{dniCliente}")
+    public List<Mascota> obtenerMascotasPorDniCliente(@PathVariable String dniCliente) {
+        return clinicaService.obtenerMascotasPorDniCliente(dniCliente);
+    }
+
+    @GetMapping("/mascotas/veterinario/{dniVeterinario}")
+    public List<Mascota> obtenerMascotasPorDniVeterinario(@PathVariable String dniVeterinario) {
+        return clinicaService.obtenerMascotasPorDniVeterinario(dniVeterinario);
     }
 
     @PostMapping("/agregarMascotas")

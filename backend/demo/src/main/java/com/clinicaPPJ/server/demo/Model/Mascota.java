@@ -1,32 +1,50 @@
 package com.clinicaPPJ.server.demo.Model;
+import jakarta.persistence.*;
 
+@Entity
 public class Mascota {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String especie;
+
+    @Column
     private String raza;
+
+    @Column
     private int edad;
-    private int clienteId;
-    private int veterinarioId;
 
-    public Mascota() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "cliente_dni", nullable = false)
+    private Cliente cliente;
 
-    public Mascota(int id, String nombre, String especie, String raza, int edad, int clienteId, int veterinarioId) {
-        this.id = id;
+
+    @ManyToOne
+    @JoinColumn(name = "veterinario_dni")
+    private Veterinario veterinario;
+
+    public Mascota() {}
+
+    public Mascota(String nombre, String especie, String raza, int edad, Cliente cliente, Veterinario veterinario) {
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
         this.edad = edad;
-        this.clienteId = clienteId;
-        this.veterinarioId = veterinarioId;
+        this.cliente = cliente;
+        this.veterinario = veterinario;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,19 +80,19 @@ public class Mascota {
         this.edad = edad;
     }
 
-    public int getClienteId() {
-        return clienteId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(int clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public int getVeterinarioId() {
-        return veterinarioId;
+    public Veterinario getVeterinario() {
+        return veterinario;
     }
 
-    public void setVeterinarioId(int veterinarioId) {
-        this.veterinarioId = veterinarioId;
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
     }
 }

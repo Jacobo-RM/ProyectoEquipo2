@@ -40,7 +40,7 @@
     methods: {
       async fetchClientes() {
         try {
-          const response = await axios.get('/api/listaclientes/');
+          const response = await axios.get('/api/clinica/clientes/');
           this.clientes = response.data;
         } catch (error) {
           console.error('Error fetching clientes:', error);

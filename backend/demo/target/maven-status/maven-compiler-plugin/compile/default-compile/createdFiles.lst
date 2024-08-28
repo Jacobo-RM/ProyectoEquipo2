@@ -1,0 +1,13 @@
+com/clinicaPPJ/server/demo/ClinicaServerApplication.class
+com/clinicaPPJ/server/demo/Model/Persona.class
+com/clinicaPPJ/server/demo/Model/Mascota.class
+com/clinicaPPJ/server/demo/Model/Cliente.class
+com/clinicaPPJ/server/demo/Repository/PersonaRepository.class
+com/clinicaPPJ/server/demo/Repository/VeterinarioRepository.class
+com/clinicaPPJ/server/demo/Repository/MascotaRepository.class
+com/clinicaPPJ/server/demo/Repository/ClienteRepository.class
+com/clinicaPPJ/server/demo/Repository/ClinicaRepository.class
+com/clinicaPPJ/server/demo/Service/ClinicaService.class
+com/clinicaPPJ/server/demo/Model/Clinica.class
+com/clinicaPPJ/server/demo/Model/Veterinario.class
+com/clinicaPPJ/server/demo/Controller/ClinicaController.class

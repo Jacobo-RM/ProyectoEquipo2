@@ -1,7 +1,4 @@
 package com.clinicaPPJ.server.demo.Model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -27,7 +24,7 @@ public class Mascota {
     @JoinColumn(name = "cliente_dni", nullable = false)
     private Cliente cliente;
 
-    
+
     @ManyToOne
     @JoinColumn(name = "veterinario_dni")
     private Veterinario veterinario;

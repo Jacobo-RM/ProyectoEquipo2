@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-// No es necesario agregar lógica adicional en el script para este ejemplo
 </script>
 
 <style scoped>
@@ -28,11 +27,6 @@ nav ul {
 nav li {
   display: inline;
   margin-right: 10px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #42b983;
 }
 
 nav a:hover {

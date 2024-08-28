@@ -1,2 +1,8 @@
+#FRONT
+
 node_modules/
 .vscode/
+
+#BACK
+
+target/

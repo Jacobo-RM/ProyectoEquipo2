@@ -1,14 +1,27 @@
 package com.clinicaPPJ.server.demo.Model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persona {
+
+    @Id
     private String dni;
+
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String direccion;
+
+    @Column
     private String telefono;
+
+    @Column(nullable = false)
     private String tipo;
 
-    public Persona() {
-    }
+    public Persona() {}
 
     public Persona(String dni, String nombre, String direccion, String telefono, String tipo) {
         this.dni = dni;

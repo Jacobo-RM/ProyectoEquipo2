@@ -1,5 +1,6 @@
 package com.clinicaPPJ.server.demo.Controller;
 
+import com.clinicaPPJ.server.demo.Model.Cliente;
 import com.clinicaPPJ.server.demo.Model.Mascota;
 import com.clinicaPPJ.server.demo.Service.ClinicaService;
 
@@ -17,8 +18,13 @@ public class ClinicaController {
     @Autowired
     private ClinicaService clinicaService;
 
-    @GetMapping
+    @GetMapping("/mascotas")
     public List<Mascota> getAllMascotas() {
         return clinicaService.getAllMascotas();
+    }
+
+    @GetMapping("/clientes")
+    public List<Cliente> obtenerTodosLosClientes() {
+        return clinicaService.obtenerTodosLosClientes();
     }
 }

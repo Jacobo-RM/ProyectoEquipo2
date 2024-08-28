@@ -1,20 +1,29 @@
--- Insertar una clínica
-INSERT INTO Clinica (nombre, direccion) VALUES ('Clinica Veterinaria Central', 'Calle Principal 123');
+-- Insertar clínicas
+INSERT INTO Clinica (nombre, direccion) VALUES
+('Clinica Veterinaria Salud Animal', 'Calle de los Mascotas, 123'),
+('Centro Veterinario Bienestar', 'Avenida de los Animales, 456');
 
--- Insertar personas (Clientes y Veterinarios)
-INSERT INTO Persona (nombre, direccion, telefono, tipo) VALUES ('Juan Perez', 'Calle Secundaria 456', '123456789', 'Cliente');
-INSERT INTO Persona (nombre, direccion, telefono, tipo) VALUES ('Maria Lopez', 'Avenida Siempre Viva 789', '987654321', 'Cliente');
-INSERT INTO Persona (nombre, direccion, telefono, tipo) VALUES ('Dr. Ana Gomez', 'Calle Tercera 101', '555123456', 'Veterinario');
-INSERT INTO Persona (nombre, direccion, telefono, tipo) VALUES ('Dr. Carlos Ruiz', 'Boulevard Central 202', '555654321', 'Veterinario');
+-- Insertar datos en la tabla Persona
+INSERT INTO Persona (dni, nombre, direccion, telefono, tipo) VALUES 
+('12345678A', 'Juan Pérez', 'Calle Falsa 123', '123456789', 'Cliente'),
+('23456789B', 'Ana García', 'Avenida Siempre Viva 456', '987654321', 'Cliente'),
+('34567890C', 'Carlos Martínez', 'Calle Luna 789', '123123123', 'Veterinario'),
+('45678901D', 'Laura Fernández', 'Calle Sol 101', '456456456', 'Veterinario');
 
--- Insertar clientes
-INSERT INTO Cliente (persona_id) VALUES ((SELECT id FROM Persona WHERE nombre = 'Juan Perez' AND tipo = 'Cliente'));
-INSERT INTO Cliente (persona_id) VALUES ((SELECT id FROM Persona WHERE nombre = 'Maria Lopez' AND tipo = 'Cliente'));
+
+-- Insertar datos en la tabla Cliente
+INSERT INTO Cliente (dni, numero_visitas) VALUES 
+('12345678A', 5),
+('23456789B', 3);
 
 -- Insertar veterinarios
-INSERT INTO Veterinario (persona_id, especialidad) VALUES ((SELECT id FROM Persona WHERE nombre = 'Dr. Ana Gomez' AND tipo = 'Veterinario'), 'Cirugía');
-INSERT INTO Veterinario (persona_id, especialidad) VALUES ((SELECT id FROM Persona WHERE nombre = 'Dr. Carlos Ruiz' AND tipo = 'Veterinario'), 'Dermatología');
+INSERT INTO Veterinario (dni, especialidad) VALUES
+('34567890C', 'Cirugía'),
+('45678901D', 'Dermatología');
+
 
 -- Insertar mascotas
-INSERT INTO Mascota (nombre, especie, raza, edad, cliente_id, veterinario_id) VALUES ('Firulais', 'Perro', 'Labrador', 3, (SELECT id FROM Cliente WHERE persona_id = (SELECT id FROM Persona WHERE nombre = 'Juan Perez' AND tipo = 'Cliente')), (SELECT id FROM Veterinario WHERE persona_id = (SELECT id FROM Persona WHERE nombre = 'Dr. Ana Gomez' AND tipo = 'Veterinario')));
-INSERT INTO Mascota (nombre, especie, raza, edad, cliente_id, veterinario_id) VALUES ('Michi', 'Gato', 'Siames', 2, (SELECT id FROM Cliente WHERE persona_id = (SELECT id FROM Persona WHERE nombre = 'Maria Lopez' AND tipo = 'Cliente')), (SELECT id FROM Veterinario WHERE persona_id = (SELECT id FROM Persona WHERE nombre = 'Dr. Carlos Ruiz' AND tipo = 'Veterinario')));
+-- Asumimos que las claves de cliente y veterinario están alineadas con la estructura de la tabla
+INSERT INTO Mascota (id, nombre, especie, raza, edad, cliente_dni, veterinario_dni) VALUES
+(1, 'Rex', 'Perro', 'Pastor Alemán', 4, '12345678A', '34567890C'),
+(2, 'Mimi', 'Gato', 'Siamés', 2, '23456789B', '45678901D');

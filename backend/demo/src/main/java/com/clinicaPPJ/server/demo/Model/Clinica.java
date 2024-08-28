@@ -1,24 +1,32 @@
 package com.clinicaPPJ.server.demo.Model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Clinica {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String direccion;
 
-    public Clinica() {
-    }
-    
-    public Clinica(int id, String nombre, String direccion) {
-        this.id = id;
+    public Clinica() {}
+
+    public Clinica(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

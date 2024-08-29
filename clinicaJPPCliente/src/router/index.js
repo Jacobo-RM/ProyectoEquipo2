@@ -7,6 +7,7 @@ import ListaMascotas from '../components/ListaMascotas.vue'
 import EditarCliente from '../components/EditarCliente.vue'
 import EditarVeterinario from '../components/EditarVeterinario.vue'
 import EditarMascota from '../components/EditarMascota.vue'
+import AgregarMascota from '@/components/AgregarMascota.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,9 +39,9 @@ const router = createRouter({
       component: EditarVeterinario
     },
     {
-      path: '/editar-mascota',
-      name: 'editar-mascota',
-      component: EditarMascota
+      path: '/agregar-mascota',
+      name: 'agregar-mascota',
+      component: AgregarMascota
     }
   ]
 })

@@ -9,7 +9,7 @@
         <li><router-link to="/mascotas">Lista de Mascotas</router-link></li>
         <li><router-link to="/editar-cliente">Agregar/Editar Cliente</router-link></li>
         <li><router-link to="/editar-veterinario">Agregar/Editar Veterinario</router-link></li>
-        <li><router-link to="/editar-mascota">Agregar/Editar Mascota</router-link></li>
+        <li><router-link to="/agregar-mascota">Agregar/Editar Mascota</router-link></li>
 
       </ul>
     </nav>

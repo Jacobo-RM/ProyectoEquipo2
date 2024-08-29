@@ -18,6 +18,8 @@ import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide } from 'vue3-carousel';
 import imagen1 from '../assets/imagen1.jpg';
 import imagen2 from '../assets/imagen2.jpg';
+import imagen3 from '../assets/imagen3.jpg';
+import imagen4 from '../assets/imagen4.jpg';
 
 export default {
   name: 'CarouselClinica',
@@ -30,6 +32,9 @@ export default {
       banners: [
         { id: 1, image: imagen1, alt: "imagen1" },
         { id: 2, image: imagen2, alt: "imagen2" },
+        { id: 3, image: imagen3, alt: "imagen3" },
+        { id: 4, image: imagen4, alt: "imagen4" },
+
       ],
       autoplayInterval: null,
     };

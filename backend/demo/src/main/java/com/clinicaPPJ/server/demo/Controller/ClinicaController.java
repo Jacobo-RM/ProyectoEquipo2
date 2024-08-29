@@ -64,7 +64,7 @@ public class ClinicaController {
     }
 
     @PostMapping("/agregarMascotaAVeterinario")
-    public void agregarMascotaAVeterinario(int idMascota, int dniVeterinario) {
+    public void agregarMascotaAVeterinario(int idMascota, String dniVeterinario) {
         clinicaService.agregarMascotaAVeterinario(idMascota, dniVeterinario);
     }
 
@@ -93,4 +93,8 @@ public class ClinicaController {
         clinicaService.borrarCliente(dniCliente);
     }
 
+    @DeleteMapping("/eliminarVeterinario/{dniVeterinario}")
+    public void eliminarVeterinario(@PathVariable String dniVeterinario) {
+        clinicaService.borrarVeterinario(dniVeterinario);
+    }
 }

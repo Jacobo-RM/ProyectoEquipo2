@@ -63,10 +63,13 @@ public class ClinicaService {
     }
 
     public Veterinario guardarVeterinario(Veterinario veterinario) {
+        if (veterinario.getDni() == null || veterinario.getDni().isEmpty()) {
+            throw new IllegalArgumentException("El DNI del veterinario no puede estar vacío");
+        }
         return veterinarioRepository.save(veterinario);
     }
 
-    public void agregarMascotaAVeterinario(int idMascota, int dniVeterinario) {
+    public void agregarMascotaAVeterinario(int idMascota, String dniVeterinario) {
         Mascota mascota = mascotaRepository.findById(idMascota).orElse(null);
         Veterinario veterinario = veterinarioRepository.findById(dniVeterinario).orElse(null);
         if (mascota != null && veterinario != null) {
@@ -100,4 +103,7 @@ public class ClinicaService {
         clienteRepository.deleteById(dniCliente);
     }
 
+    public void borrarVeterinario(String dniVeterinario) {
+        veterinarioRepository.deleteById(dniVeterinario);
+    }
 }

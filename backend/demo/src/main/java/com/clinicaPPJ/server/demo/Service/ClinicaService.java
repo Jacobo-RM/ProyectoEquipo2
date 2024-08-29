@@ -8,10 +8,15 @@ import com.clinicaPPJ.server.demo.Repository.MascotaRepository;
 import com.clinicaPPJ.server.demo.Repository.VeterinarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,6 +25,7 @@ public class ClinicaService {
     private MascotaRepository mascotaRepository;
     private ClienteRepository clienteRepository;
     private VeterinarioRepository veterinarioRepository;
+ 
 
     @Autowired
     public ClinicaService(MascotaRepository mascotaRepository, ClienteRepository clienteRepository, VeterinarioRepository veterinarioRepository) {
@@ -28,10 +34,19 @@ public class ClinicaService {
         this.veterinarioRepository = veterinarioRepository;
     }
 
+    @Transactional(readOnly = true)
+    public Mascota getMascotaById(int id) {
+        return mascotaRepository.findById(id).orElse(null);
+    }
 
     @Transactional(readOnly = true)
     public List<Mascota> getAllMascotas() {
         return mascotaRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Cliente getClienteById(String dni) {
+        return clienteRepository.findById(dni).orElse(null);
     }
 
     @Transactional(readOnly = true)
@@ -65,7 +80,7 @@ public class ClinicaService {
         }
     }
 
-    public void agregarMascotaACliente(int idMascota, int dniCliente) {
+    public void agregarMascotaACliente(int idMascota, String dniCliente) {
         Mascota mascota = mascotaRepository.findById(idMascota).orElse(null);
         Cliente cliente = clienteRepository.findById(dniCliente).orElse(null);
         if (mascota != null && cliente != null) {
@@ -78,15 +93,23 @@ public class ClinicaService {
         mascotaRepository.save(mascota);
     }
 
-    public void actualizarCliente(Cliente cliente) {
-        clienteRepository.save(cliente);
+    public void actualizarCliente(String dni, Cliente cliente) {
+        Optional<Cliente> optionalCliente = clienteRepository.findById(dni);
+        if (optionalCliente.isPresent()) {
+            Cliente existingCliente = optionalCliente.get();
+            existingCliente.setNombre(cliente.getNombre());
+            existingCliente.setDireccion(cliente.getDireccion());
+            existingCliente.setTelefono(cliente.getTelefono());
+            existingCliente.setNumeroVisitas(cliente.getNumeroVisitas());
+            clienteRepository.save(existingCliente);
+        } 
     }
 
     public void borrarMascota(int idMascota) {
         mascotaRepository.deleteById(idMascota);
     }
 
-    public void borrarCliente(int dniCliente) {
+    public void borrarCliente(String dniCliente) {
         clienteRepository.deleteById(dniCliente);
     }
 

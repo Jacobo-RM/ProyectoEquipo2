@@ -6,10 +6,13 @@ import com.clinicaPPJ.server.demo.Model.Veterinario;
 import com.clinicaPPJ.server.demo.Service.ClinicaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +40,14 @@ public class ClinicaController {
         return clinicaService.obtenerTodosLosVeterinarios();
     }
 
+    @GetMapping("/mascotas/{id}")
+    public Mascota getMascotaById(@PathVariable int id) {
+        return clinicaService.getMascotaById(id);
+    }
+    @GetMapping("/clientes/{dni}")
+    public Cliente getClienteById(@PathVariable String dni) {
+        return clinicaService.getClienteById(dni);
+    }
     @PostMapping("/agregarMascotas")
     public Mascota guardarMascota(Mascota mascota) {
         return clinicaService.guardarMascota(mascota);
@@ -58,7 +69,7 @@ public class ClinicaController {
     }
 
     @PostMapping("/agregarMascotaACliente")
-    public void agregarMascotaACliente(int idMascota, int dniCliente) {
+    public void agregarMascotaACliente(int idMascota, String dniCliente) {
         clinicaService.agregarMascotaACliente(idMascota, dniCliente);
     }
 
@@ -67,9 +78,10 @@ public class ClinicaController {
         clinicaService.actualizarMascota(mascota);
     }
 
-    @PutMapping("/actualizarCliente")
-    public void actualizarCliente(Cliente cliente) {
-        clinicaService.actualizarCliente(cliente);
+     @PutMapping("/clientes/{dni}")
+    public ResponseEntity<Void> actualizarCliente(@PathVariable String dni, @RequestBody Cliente cliente) {
+        clinicaService.actualizarCliente(dni, cliente);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/eliminarMascota")
@@ -78,7 +90,7 @@ public class ClinicaController {
     }
 
     @DeleteMapping("/eliminarCliente")
-    public void eliminarCliente(int dniCliente) {
+    public void eliminarCliente(String dniCliente) {
         clinicaService.borrarCliente(dniCliente);
     }
 

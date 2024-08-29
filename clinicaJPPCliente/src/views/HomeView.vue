@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <h1>Bienvenido a la Clínica Veterinaria</h1>
     <nav>
       <ul>
@@ -31,5 +32,6 @@ nav li {
 
 nav a:hover {
   text-decoration: underline;
+
 }
 </style>

@@ -9,6 +9,8 @@ import EditarVeterinario from '../components/EditarVeterinario.vue'
 import EditarMascota from '../components/EditarMascota.vue'
 import AgregarMascota from '@/components/AgregarMascota.vue'
 
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -29,9 +31,10 @@ const router = createRouter({
       component: ListaMascotas
     },
     {
-      path: '/editar-cliente',
+      path: '/editar-cliente/:dni',
       name: 'editar-cliente',
-      component: EditarCliente
+      component: EditarCliente,
+      props: true
     },
     {
       path: '/editar-veterinario',

@@ -3,11 +3,13 @@ package com.clinicaPPJ.server.demo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +28,11 @@ public class ClinicaController {
     @GetMapping("/mascotas")
     public List<Mascota> getAllMascotas() {
         return clinicaService.getAllMascotas();
+    }
+
+    @GetMapping("/mascota/{id}")
+    public Mascota obtenerMascotaPorId(@PathVariable ("id") long id) {
+        return clinicaService.obtenerMascotaPorId(id);
     }
 
     @GetMapping("/clientes")
@@ -64,18 +71,22 @@ public class ClinicaController {
     }
 
     @PostMapping("/agregarMascotaAVeterinario")
-    public void agregarMascotaAVeterinario(int idMascota, String dniVeterinario) {
+    public void agregarMascotaAVeterinario(long idMascota, String dniVeterinario) {
         clinicaService.agregarMascotaAVeterinario(idMascota, dniVeterinario);
     }
 
     @PostMapping("/agregarMascotaACliente")
-    public void agregarMascotaACliente(int idMascota, int dniCliente) {
+    public void agregarMascotaACliente(long idMascota, int dniCliente) {
         clinicaService.agregarMascotaACliente(idMascota, dniCliente);
     }
 
-    @PutMapping("/actualizarMascota")
-    public void actualizarMascota(Mascota mascota) {
+    @PutMapping("/actualizarMascota/{id}")
+    public ResponseEntity<Mascota> actualizarMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
+        if (!id.equals(mascota.getId())) {
+            return ResponseEntity.badRequest().build();
+        }
         clinicaService.actualizarMascota(mascota);
+        return ResponseEntity.ok(mascota);
     }
 
     @PutMapping("/actualizarCliente")

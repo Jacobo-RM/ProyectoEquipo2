@@ -45,7 +45,7 @@ const isEditing = ref(false);
 
 onMounted(async () => {
   const dni = route.params.dni;
-  if (dni) {
+  if (dni !== null) {
     isEditing.value = true;
     try {
       const response = await axios.get(`/api/clinica/veterinarios/${dni}`);

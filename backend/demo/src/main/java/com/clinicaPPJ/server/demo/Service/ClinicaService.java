@@ -1,17 +1,17 @@
 package com.clinicaPPJ.server.demo.Service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.clinicaPPJ.server.demo.Model.Cliente;
 import com.clinicaPPJ.server.demo.Model.Mascota;
 import com.clinicaPPJ.server.demo.Model.Veterinario;
 import com.clinicaPPJ.server.demo.Repository.ClienteRepository;
 import com.clinicaPPJ.server.demo.Repository.MascotaRepository;
 import com.clinicaPPJ.server.demo.Repository.VeterinarioRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -22,12 +22,12 @@ public class ClinicaService {
     private VeterinarioRepository veterinarioRepository;
 
     @Autowired
-    public ClinicaService(MascotaRepository mascotaRepository, ClienteRepository clienteRepository, VeterinarioRepository veterinarioRepository) {
+    public ClinicaService(MascotaRepository mascotaRepository, ClienteRepository clienteRepository,
+            VeterinarioRepository veterinarioRepository) {
         this.mascotaRepository = mascotaRepository;
         this.clienteRepository = clienteRepository;
         this.veterinarioRepository = veterinarioRepository;
     }
-
 
     @Transactional(readOnly = true)
     public List<Mascota> getAllMascotas() {
@@ -35,13 +35,23 @@ public class ClinicaService {
     }
 
     @Transactional(readOnly = true)
-     public List<Cliente> obtenerTodosLosClientes() {
+    public List<Cliente> obtenerTodosLosClientes() {
         return clienteRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public List<Veterinario> obtenerTodosLosVeterinarios() {
         return veterinarioRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Mascota> obtenerMascotasPorDniCliente(String dniCliente) {
+        return mascotaRepository.findByClienteDni(dniCliente);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Mascota> obtenerMascotasPorDniVeterinario(String dniVeterinario) {
+        return mascotaRepository.findByVeterinarioDni(dniVeterinario);
     }
 
     public Mascota guardarMascota(Mascota mascota) {
@@ -89,11 +99,5 @@ public class ClinicaService {
     public void borrarCliente(int dniCliente) {
         clienteRepository.deleteById(dniCliente);
     }
-
-    
-
-
-
-
 
 }

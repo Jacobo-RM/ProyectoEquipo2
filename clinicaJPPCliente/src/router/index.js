@@ -11,11 +11,7 @@ import EditarMascota from '../components/EditarMascota.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'App',
-      component: App
-    },
+
     {
       path: '/clientes',
       name: 'lista-clientes',

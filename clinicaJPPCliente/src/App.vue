@@ -3,6 +3,9 @@
     <div class="header">
       <Header />
     </div>
+    <Modal v-if="showModal" :isVisible="isModalVisible" @close="closeModal">
+      <router-view />
+    </Modal>
     <div class="CarouselClinica">
       <CarouselClinica :banners="imagenesBanner" />
     </div>
@@ -16,17 +19,40 @@ import Header from './components/Header.vue';
 import CarouselClinica from './components/CarouselClinica.vue';
 import Main from './components/Main.vue';
 import Footer from './components/Footer.vue';
+import Modal from './components/Modal.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
+    Modal,
     CarouselClinica,
     Main,
     Footer
+  },
+  data() {
+    return {
+      isModalVisible: false
+    };
+  },
+  computed: {
+    showModal() {
+      return this.$route.path !== '/';
+    }
+  },
+  watch: {
+    $route() {
+      this.isModalVisible = true;
+    }
+  },
+  methods: {
+    closeModal() {
+      this.isModalVisible = false;
+    }
   }
 };
 </script>
+
 
 <style scoped>
 #app {

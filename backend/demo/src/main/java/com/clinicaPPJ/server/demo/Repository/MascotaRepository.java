@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.clinicaPPJ.server.demo.Model.Mascota;
 
 @Repository
-public interface MascotaRepository extends JpaRepository<Mascota, Integer> {
+public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     List<Mascota> findByClienteDni(String dniCliente);
 
     List<Mascota> findByVeterinarioDni(String dniVeterinario);

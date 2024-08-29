@@ -45,7 +45,7 @@ public class ClinicaService {
 
 
     @Transactional(readOnly = true)
-    public Mascota getMascotaById(int id) {
+    public Mascota getMascotaById(long id) {
         return mascotaRepository.findById(id).orElse(null);
     }
 
@@ -97,7 +97,7 @@ public class ClinicaService {
         return veterinarioRepository.save(veterinario);
     }
 
-    public void agregarMascotaAVeterinario(int idMascota, String dniVeterinario) {
+    public void agregarMascotaAVeterinario(long idMascota, String dniVeterinario) {
         Mascota mascota = mascotaRepository.findById(idMascota).orElse(null);
         Veterinario veterinario = veterinarioRepository.findById(dniVeterinario).orElse(null);
         if (mascota != null && veterinario != null) {
@@ -106,7 +106,7 @@ public class ClinicaService {
         }
     }
 
-    public void agregarMascotaACliente(int idMascota, String dniCliente) {
+    public void agregarMascotaACliente(long idMascota, String dniCliente) {
         Mascota mascota = mascotaRepository.findById(idMascota).orElse(null);
         Cliente cliente = clienteRepository.findById(dniCliente).orElse(null);
         if (mascota != null && cliente != null) {
@@ -115,8 +115,13 @@ public class ClinicaService {
         }
     }
 
+    
     public void actualizarMascota(Mascota mascota) {
-        mascotaRepository.save(mascota);
+        if (mascota.getId() != null) {
+            mascotaRepository.save(mascota);
+        } else {
+            throw new IllegalArgumentException("El ID de la mascota no puede ser nulo para actualizarla.");
+        }
     }
 
     public void actualizarCliente(String dni, Cliente cliente) {
@@ -131,7 +136,7 @@ public class ClinicaService {
         } 
     }
 
-    public void borrarMascota(int idMascota) {
+    public void borrarMascota(long idMascota) {
         mascotaRepository.deleteById(idMascota);
     }
 

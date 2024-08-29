@@ -30,6 +30,11 @@ public class ClinicaController {
         return clinicaService.getAllMascotas();
     }
 
+    @GetMapping("/mascota/{id}")
+    public Mascota obtenerMascotaPorId(@PathVariable ("id") long id) {
+        return clinicaService.getMascotaById(id);
+    }
+
     @GetMapping("/clientes")
     public List<Cliente> obtenerTodosLosClientes() {
         return clinicaService.obtenerTodosLosClientes();
@@ -73,18 +78,22 @@ public class ClinicaController {
     }
 
     @PostMapping("/agregarMascotaAVeterinario")
-    public void agregarMascotaAVeterinario(int idMascota, String dniVeterinario) {
+    public void agregarMascotaAVeterinario(long idMascota, String dniVeterinario) {
         clinicaService.agregarMascotaAVeterinario(idMascota, dniVeterinario);
     }
 
     @PostMapping("/agregarMascotaACliente")
-    public void agregarMascotaACliente(int idMascota, String dniCliente) {
+    public void agregarMascotaACliente(long idMascota, String dniCliente) {
         clinicaService.agregarMascotaACliente(idMascota, dniCliente);
     }
 
-    @PutMapping("/actualizarMascota")
-    public void actualizarMascota(Mascota mascota) {
+    @PutMapping("/actualizarMascota/{id}")
+    public ResponseEntity<Mascota> actualizarMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
+        if (!id.equals(mascota.getId())) {
+            return ResponseEntity.badRequest().build();
+        }
         clinicaService.actualizarMascota(mascota);
+        return ResponseEntity.ok(mascota);
     }
 
      @PutMapping("/clientes/{dni}")
